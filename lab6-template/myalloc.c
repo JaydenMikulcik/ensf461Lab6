@@ -1,4 +1,7 @@
 #include <stddef.h>
+
+#include <sys/mman.h>
+
 #include "myalloc.h" // This include should appear last
 
 
@@ -12,6 +15,7 @@ extern int mydestroy() {
 }
 
 extern void* myalloc(size_t size){
+    _arena_start = mmap(NULL, size, PROT_READ|PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
     return;
 }
 
